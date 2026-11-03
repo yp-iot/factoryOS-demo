@@ -1,6 +1,7 @@
 import { ArrowLeft, Cpu, Star } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { appMeta } from '../areas/registry'
+import { useIsPreview } from '../lib/preview'
 import { useStore } from '../sim/store'
 import type { AppId, RunState } from '../sim/types'
 
@@ -85,6 +86,8 @@ export function Button({
 export function AppHeader({ app, children }: { app: AppId; children?: ReactNode }) {
   const meta = appMeta(app)
   const go = useStore((s) => s.go)
+  // The area page card already shows the name and blurb above the preview.
+  if (useIsPreview()) return null
   return (
     <div className="mb-4 flex items-center gap-4">
       <button

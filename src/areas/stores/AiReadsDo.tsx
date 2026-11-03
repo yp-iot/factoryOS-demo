@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AppHeader, Button, Card } from '../../components/ui'
 import { num } from '../../lib/format'
 import { setDo } from '../../sim/ops'
+import { useIsPreview } from '../../lib/preview'
 import { useStore } from '../../sim/store'
 import { DO_SAMPLES, saveDo, type DoSample } from './doSamples'
 
@@ -52,6 +53,7 @@ function DoPaper({ d, scanning = false }: { d: DoSample; scanning?: boolean }) {
 export function AiReadsDo() {
   const stage = useStore((s) => s.doStage)
   const sample = useStore((s) => s.doSample)
+  const preview = useIsPreview()
   const grns = useStore((s) => s.grns)
   const materials = useStore((s) => s.materials)
   const [picking, setPicking] = useState(false)
@@ -63,14 +65,14 @@ export function AiReadsDo() {
 
   // Fill the fields one by one, then hand over for a human check.
   useEffect(() => {
-    if (stage !== 'reading') return
+    if (stage !== 'reading' || preview) return
     const t = setInterval(() => setRevealed((r) => r + 1), READ_MS / fields)
     const done = setTimeout(() => setDo('check'), READ_MS)
     return () => {
       clearInterval(t)
       clearTimeout(done)
     }
-  }, [stage, fields])
+  }, [stage, fields, preview])
 
   const start = (i: number) => {
     setPicking(false)

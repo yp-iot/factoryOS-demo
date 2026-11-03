@@ -2,6 +2,7 @@ import { Camera } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { AppHeader, Card } from '../../components/ui'
 import { clock, num, pct } from '../../lib/format'
+import { useIsPreview } from '../../lib/preview'
 import { takeFlag } from '../../sim/ops'
 import { useStore } from '../../sim/store'
 import type { Defect } from '../../sim/types'
@@ -46,6 +47,7 @@ export function AiCamera() {
   const camera = useStore((s) => s.camera)
   const m5 = useStore((s) => s.machines.find((m) => m.id === 'M5')!)
   const speed = useStore((s) => s.speed)
+  const preview = useIsPreview()
   const moving = speed > 0 && m5.status === 'run'
 
   const [parts, setParts] = useState<Part[]>([])
@@ -65,7 +67,8 @@ export function AiCamera() {
         clockRef.current += dt
         if (clockRef.current >= nextSpawn) {
           nextSpawn = clockRef.current + SPAWN_MS
-          const flag = useStore.getState().camera.flagging[0] ?? null
+          // A preview leaves flagged parts for the real screen to catch.
+          const flag = preview ? null : (useStore.getState().camera.flagging[0] ?? null)
           if (flag) takeFlag()
           setParts((ps) => [...ps.filter((p) => clockRef.current - p.born < TRAVEL_MS), { id: ++idRef.current, born: clockRef.current, defect: flag }])
         }
@@ -75,7 +78,7 @@ export function AiCamera() {
     }
     raf = requestAnimationFrame(loop)
     return () => cancelAnimationFrame(raf)
-  }, [moving])
+  }, [moving, preview])
 
   const total = camera.good + camera.reject
   const rejects = [...camera.recent].reverse()

@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { AppHeader, Button, Card } from '../../components/ui'
 import { clock } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
+import { useIsPreview } from '../../lib/preview'
 import { useStore } from '../../sim/store'
 
 interface Line {
@@ -20,6 +21,7 @@ const PICK_LISTS = [
 
 export function VoiceWarehouse() {
   const speed = useStore((s) => s.speed)
+  const preview = useIsPreview()
   const [log, setLog] = useAppState<Line[]>('voice-log', () => [])
   const [list, setList] = useAppState('voice-list', () => 0)
   const [step, setStep] = useAppState('voice-step', () => 0)
@@ -28,17 +30,18 @@ export function VoiceWarehouse() {
   const running = step < script.length
 
   useEffect(() => {
-    if (!running || speed === 0) return
+    if (!running || speed === 0 || preview) return
     const t = setTimeout(() => {
       setLog((l) => [...l, { who: step % 2 === 0 ? 'system' : 'picker', text: script[step], t: useStore.getState().simTime }])
       setStep(step + 1)
     }, step === 0 ? 600 : 2200)
     return () => clearTimeout(t)
-  }, [step, running, speed, script, setLog, setStep])
+  }, [step, running, speed, preview, script, setLog, setStep])
 
   useEffect(() => {
+    if (preview) return
     end.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-  }, [log.length])
+  }, [log.length, preview])
 
   const listening = running && step % 2 === 1
 

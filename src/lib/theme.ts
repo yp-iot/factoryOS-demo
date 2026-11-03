@@ -4,12 +4,12 @@ export type Theme = 'dark' | 'light'
 
 const KEY = 'factoryos-theme'
 
-/** The theme the viewer chose last time on this device; dark if none. */
+/** The theme the viewer chose last time on this device; light if none. */
 export function savedTheme(): Theme {
   try {
-    return localStorage.getItem(KEY) === 'light' ? 'light' : 'dark'
+    return localStorage.getItem(KEY) === 'dark' ? 'dark' : 'light'
   } catch {
-    return 'dark'
+    return 'light'
   }
 }
 
