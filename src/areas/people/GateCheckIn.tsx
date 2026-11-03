@@ -12,6 +12,13 @@ const KIND_CHIP: Record<GateEntry['kind'], string> = {
   Contractor: 'bg-slate-500/20 text-dim',
 }
 
+/** A Malaysian number plate: white letters and numbers on black, the same in either theme. */
+function Plate({ text }: { text: string }) {
+  return (
+    <span className="inline-block rounded-sm border-2 border-neutral-300 bg-black px-2 py-0.5 text-sm font-bold tracking-[0.12em] whitespace-nowrap text-white">{text}</span>
+  )
+}
+
 export function GateCheckIn() {
   const gate = useStore((s) => s.gate)
   const [kind, setKind] = useState<GateEntry['kind']>('Visitor')
@@ -81,7 +88,7 @@ export function GateCheckIn() {
           <tbody>
             {sorted.map((g) => (
               <tr key={g.id} className="slide-in border-b border-line/50 last:border-0">
-                <td className="py-3 pl-4">{g.plate ? <span className="rounded border border-line bg-black px-2 py-0.5 font-mono font-bold tracking-wider">{g.plate}</span> : <span className="text-dim">On foot</span>}</td>
+                <td className="py-3 pl-4">{g.plate ? <Plate text={g.plate} /> : <span className="text-dim">On foot</span>}</td>
                 <td>
                   <span className={`rounded px-2 py-0.5 text-xs font-bold ${KIND_CHIP[g.kind]}`}>{g.kind}</span>
                 </td>

@@ -36,7 +36,7 @@ export function seedGate(now: number): GateEntry[] {
     { id: 'G-0412', plate: 'VBN 2291', kind: 'Lorry', who: 'Contoh Kotak Sdn Bhd', purpose: 'Delivery: cartons', in: at(now, 8, 10), out: at(now, 8, 40) },
     { id: 'G-0413', plate: 'WPL 7720', kind: 'Contractor', who: 'Aircon service team', purpose: 'Office aircon service', in: at(now, 8, 45), out: null },
     { id: 'G-0414', plate: null, kind: 'Visitor', who: 'Mould supplier rep', purpose: 'M6 mould trial', in: at(now, 9, 0), out: null },
-    { id: 'G-0415', plate: 'BMF 105', kind: 'Visitor', who: 'Customer quality auditor', purpose: 'Audit visit', in: at(now, 9, 15), out: null },
+    { id: 'G-0415', plate: 'BPY 8852', kind: 'Visitor', who: 'Customer quality auditor', purpose: 'Audit visit', in: at(now, 9, 15), out: null },
   ]
 }
 
