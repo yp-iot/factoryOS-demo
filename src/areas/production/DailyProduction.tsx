@@ -4,12 +4,14 @@ import { AppHeader, Button, Card, StatusLight } from '../../components/ui'
 import { clock, num } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { dayStart } from '../../sim/seed'
+import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
 
 export function DailyProduction() {
   const machines = useStore((s) => s.machines)
   const now = useStore((s) => s.simTime)
   const notify = useStore((s) => s.notify)
+  const c = useChartColors()
   const [sentAt, setSentAt] = useAppState<number | null>('daily-sent', () => null)
 
   // Target so far = daily target × share of the 24-hour day already gone.
@@ -75,13 +77,13 @@ export function DailyProduction() {
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chart} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
-                <CartesianGrid vertical={false} stroke="#24384e" />
-                <XAxis dataKey="id" tick={{ fill: '#94a3b8', fontSize: 12 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} unit="%" width={52} />
-                <Tooltip cursor={{ fill: 'rgb(255 255 255 / 0.05)' }} contentStyle={{ background: '#12263c', border: '1px solid #24384e', borderRadius: 8 }} />
+                <CartesianGrid vertical={false} stroke={c.grid} />
+                <XAxis dataKey="id" tick={{ fill: c.tick, fontSize: 12 }} tickLine={false} axisLine={{ stroke: c.grid }} />
+                <YAxis tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={false} unit="%" width={52} />
+                <Tooltip cursor={{ fill: c.cursor }} contentStyle={c.tooltip} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
-                <Bar dataKey="Target" fill="#334155" isAnimationActive={false} />
-                <Bar dataKey="Actual" fill="#22c55e" isAnimationActive={false} />
+                <Bar dataKey="Target" fill={c.muted} isAnimationActive={false} />
+                <Bar dataKey="Actual" fill={c.run} isAnimationActive={false} />
               </BarChart>
             </ResponsiveContainer>
           </div>

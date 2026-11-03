@@ -1,4 +1,4 @@
-import { Pause, PlayCircle, RotateCcw, Smartphone } from 'lucide-react'
+import { Moon, Pause, PlayCircle, RotateCcw, Smartphone, Sun } from 'lucide-react'
 import { clock, date, shiftOf } from '../lib/format'
 import { useSimNow } from '../sim/hooks'
 import { useStore } from '../sim/store'
@@ -9,7 +9,7 @@ const SPEEDS: Speed[] = [1, 10, 60]
 
 export function TopBar() {
   const now = useSimNow()
-  const { speed, setSpeed, reset, phoneOpen, setPhoneOpen, setScenariosOpen, go } = useStore()
+  const { speed, setSpeed, reset, phoneOpen, setPhoneOpen, setScenariosOpen, go, theme, toggleTheme } = useStore()
 
   return (
     <header className="relative flex h-16 shrink-0 items-center gap-4 border-b border-line bg-panel px-4">
@@ -68,6 +68,14 @@ export function TopBar() {
           className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-sm text-dim hover:text-ink"
         >
           <RotateCcw size={15} /> Reset
+        </button>
+        <button
+          onClick={toggleTheme}
+          className="grid h-9 w-9 place-items-center rounded-lg border border-line text-dim hover:text-ink"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
         </button>
         <button
           onClick={() => setPhoneOpen(!phoneOpen)}

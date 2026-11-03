@@ -2,10 +2,9 @@ import { Crown, Moon, Zap } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { AppHeader, Card, STATUS_LABEL, Stat, StatusLight } from '../../components/ui'
 import { clock, num, rm } from '../../lib/format'
+import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
 import type { Machine, RunState } from '../../sim/types'
-
-const BAR: Record<RunState, string> = { run: '#22c55e', idle: '#f59e0b', stop: '#ef4444' }
 
 const sen = (rmPerPart: number) => `${(rmPerPart * 100).toFixed(2)} sen`
 
@@ -15,6 +14,7 @@ export function PowerCost() {
   const setRate = useStore((s) => s.setRate)
   const selected = useStore((s) => s.powerMachine)
   const select = useStore((s) => s.setPowerMachine)
+  const c = useChartColors()
 
   const ranked = [...machines].sort((a, b) => b.kWh - a.kWh)
   const maxKW = Math.max(...machines.map((m) => m.runKW))
@@ -90,7 +90,7 @@ export function PowerCost() {
                   <td className="w-32">
                     <div className="tabular text-xs">{num(m.kW, 1)} kW</div>
                     <div className="mt-0.5 h-1.5 rounded bg-panel-2">
-                      <div className="h-full rounded" style={{ width: `${(m.kW / maxKW) * 100}%`, background: BAR[m.status] }} />
+                      <div className="h-full rounded" style={{ width: `${(m.kW / maxKW) * 100}%`, background: c[m.status] }} />
                     </div>
                   </td>
                   <td className="tabular text-right font-semibold">{rm(m.kWh * rate)}</td>
@@ -116,6 +116,7 @@ export function PowerCost() {
 
 function MachineDay({ m, rate }: { m: Machine; rate: number }) {
   const now = useStore((s) => s.simTime)
+  const c = useChartColors()
   const data = [...m.kwLog.slice(-95), { t: now, kW: m.kW, status: m.status }].map((d) => ({ ...d, label: clock(d.t) }))
   const idleRM = m.idleKWh * rate
 
@@ -137,19 +138,19 @@ function MachineDay({ m, rate }: { m: Machine; rate: number }) {
       <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barCategoryGap={1} margin={{ top: 4, right: 4, bottom: 0, left: -18 }}>
-            <CartesianGrid vertical={false} stroke="#24384e" />
-            <XAxis dataKey="label" interval={15} tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} unit=" kW" width={64} />
+            <CartesianGrid vertical={false} stroke={c.grid} />
+            <XAxis dataKey="label" interval={15} tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={{ stroke: c.grid }} />
+            <YAxis tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={false} unit=" kW" width={64} />
             <Tooltip
-              cursor={{ fill: 'rgb(255 255 255 / 0.05)' }}
-              contentStyle={{ background: '#12263c', border: '1px solid #24384e', borderRadius: 8 }}
-              labelStyle={{ color: '#e8edf6' }}
+              cursor={{ fill: c.cursor }}
+              contentStyle={c.tooltip}
+              labelStyle={{ color: c.text }}
               formatter={(v, _n, item) => [`${num(Number(v), 1)} kW · ${STATUS_LABEL[(item.payload as { status: RunState }).status]}`, '']}
               separator=""
             />
             <Bar dataKey="kW" isAnimationActive={false}>
               {data.map((d) => (
-                <Cell key={d.t} fill={BAR[d.status]} />
+                <Cell key={d.t} fill={c[d.status]} />
               ))}
             </Bar>
           </BarChart>

@@ -4,6 +4,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { AppHeader, Button, Card, Stat } from '../../components/ui'
 import { num, rm } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
+import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
 
 interface Sale {
@@ -26,6 +27,7 @@ export function ScrapRevenue() {
     { id: 2, t: now - 9 * 86400000, type: 'ABS regrind', kg: 180, rmPerKg: 2.6 },
     { id: 1, t: now - 15 * 86400000, type: 'Mixed lumps', kg: 260, rmPerKg: 0.9 },
   ])
+  const c = useChartColors()
   const [type, setType] = useState('PP regrind')
   const [kg, setKg] = useState(150)
 
@@ -59,11 +61,11 @@ export function ScrapRevenue() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={months} margin={{ top: 4, right: 4, bottom: 0, left: -10 }}>
-                <CartesianGrid vertical={false} stroke="#24384e" />
-                <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} width={50} />
-                <Tooltip cursor={{ fill: 'rgb(255 255 255 / 0.05)' }} contentStyle={{ background: '#12263c', border: '1px solid #24384e', borderRadius: 8 }} formatter={(v) => [rm(Number(v), 0), 'Sold']} />
-                <Bar dataKey="rm" fill="#38bdf8" radius={[4, 4, 0, 0]} isAnimationActive={false} />
+                <CartesianGrid vertical={false} stroke={c.grid} />
+                <XAxis dataKey="month" tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={{ stroke: c.grid }} />
+                <YAxis tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={false} width={50} />
+                <Tooltip cursor={{ fill: c.cursor }} contentStyle={c.tooltip} formatter={(v) => [rm(Number(v), 0), 'Sold']} />
+                <Bar dataKey="rm" fill={c.info} radius={[4, 4, 0, 0]} isAnimationActive={false} />
               </BarChart>
             </ResponsiveContainer>
           </div>

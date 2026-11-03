@@ -16,6 +16,37 @@
   --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
+/* Light theme. The dark block repeats the defaults so a part of the page
+   (the mock phone, the camera feed) can stay dark inside a light page. */
+[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f4f1ec;
+  --color-panel: #ffffff;
+  --color-panel-2: #eae5dd;
+  --color-line: #d9d2c6;
+  --color-ink: #0b1f33;
+  --color-dim: #5a6270;
+  --color-run: #16a34a;
+  --color-stop: #dc2626;
+  --color-idle: #d97706;
+  --color-accent: #d97706;
+  --color-info: #0284c7;
+}
+[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #0b1f33;
+  --color-panel: #12263c;
+  --color-panel-2: #18304a;
+  --color-line: #24384e;
+  --color-ink: #e8edf6;
+  --color-dim: #94a3b8;
+  --color-run: #22c55e;
+  --color-stop: #ef4444;
+  --color-idle: #f59e0b;
+  --color-accent: #f5a623;
+  --color-info: #38bdf8;
+}
+
 html {
   font-size: 15px;
 }
@@ -63,7 +94,7 @@ body {
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { background: #2c4460; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 4px; }
 
 /* The amber hazard stripe across the top of the FactoryOS poster. */
 .hazard {

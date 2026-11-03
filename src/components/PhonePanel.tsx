@@ -58,7 +58,7 @@ export function PhonePanel() {
           <X size={18} />
         </button>
       </div>
-      <div className="flex min-h-0 w-full max-w-[17rem] flex-1 flex-col rounded-[2.2rem] border-[6px] border-slate-700 bg-black p-2 shadow-2xl">
+      <div data-theme="dark" className="flex min-h-0 w-full max-w-[17rem] flex-1 flex-col rounded-[2.2rem] text-ink border-[6px] border-slate-700 bg-black p-2 shadow-2xl">
         <div className="relative flex items-center justify-between px-4 pt-1 pb-2 text-xs font-semibold">
           <span className="tabular">{clock(now)}</span>
           <span className="absolute left-1/2 top-1 h-4 w-20 -translate-x-1/2 rounded-full bg-slate-800" />
@@ -99,7 +99,7 @@ export function Toast() {
       }}
       className="fixed top-20 right-6 z-50 w-80 cursor-pointer text-left"
     >
-      <div className="rounded-2xl bg-slate-900 shadow-2xl shadow-black/60">
+      <div data-theme="dark" className="rounded-2xl bg-slate-900 text-ink shadow-2xl shadow-black/60">
         <Message m={toast} />
       </div>
     </div>

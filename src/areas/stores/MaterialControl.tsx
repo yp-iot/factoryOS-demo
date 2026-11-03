@@ -5,6 +5,7 @@ import { AppHeader, Button, Card } from '../../components/ui'
 import { clock, date, num } from '../../lib/format'
 import { dailyUsage } from '../../sim/engine'
 import { statusOf, suggestMaterial } from '../../sim/orders'
+import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
 import type { Material } from '../../sim/types'
 
@@ -38,6 +39,7 @@ function Prediction() {
   const now = useStore((s) => s.simTime)
   const notify = useStore((s) => s.notify)
   const [drafted, setDrafted] = useState(false)
+  const c = useChartColors()
   const first = useDaysLeft().sort((a, b) => a.days - b.days)[0]
   const { m, perDay, days } = first
   const orderBy = now + Math.max(0, (m.balance + m.lineSide - m.reorderLevel) / perDay) * DAY
@@ -87,10 +89,10 @@ function Prediction() {
         <div className="h-36 w-80 shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={forecast} margin={{ top: 8, right: 8, bottom: 0, left: -10 }}>
-              <XAxis dataKey="label" interval={0} tick={{ fill: '#94a3b8', fontSize: 10 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} tickLine={false} axisLine={false} width={48} />
-              <ReferenceLine y={m.reorderLevel} stroke="#f59e0b" strokeDasharray="4 4" label={{ value: 'Reorder', fill: '#f59e0b', fontSize: 10, position: 'insideTopRight' }} />
-              <Line dataKey="kg" stroke="#38bdf8" strokeWidth={2.5} dot={false} isAnimationActive={false} />
+              <XAxis dataKey="label" interval={0} tick={{ fill: c.tick, fontSize: 10 }} tickLine={false} axisLine={{ stroke: c.grid }} />
+              <YAxis tick={{ fill: c.tick, fontSize: 10 }} tickLine={false} axisLine={false} width={48} />
+              <ReferenceLine y={m.reorderLevel} stroke={c.idle} strokeDasharray="4 4" label={{ value: 'Reorder', fill: c.idle, fontSize: 10, position: 'insideTopRight' }} />
+              <Line dataKey="kg" stroke={c.info} strokeWidth={2.5} dot={false} isAnimationActive={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>

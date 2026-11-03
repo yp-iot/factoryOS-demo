@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { applyTheme, savedTheme, type Theme } from '../lib/theme'
 import { logPower, nextRandom, oee, tick } from './engine'
 import { progressOrders, suggestMaterial } from './orders'
 import { seedBreakdowns, seedMachines, seedMaterials, seedMessages, seedRequests, seedWorkOrders, startTime, TECHNICIANS } from './seed'
@@ -63,6 +64,7 @@ interface SimData {
   nextId: number
 
   view: View
+  theme: Theme
   powerMachine: MachineId // machine shown in Power Cost's 24-hour chart
   phoneOpen: boolean
   scenariosOpen: boolean
@@ -78,6 +80,7 @@ interface Actions {
   go: (v: View) => void
   openApp: (app: AppId) => void
   setPhoneOpen: (open: boolean) => void
+  toggleTheme: () => void
   setPowerMachine: (id: MachineId) => void
   setScenariosOpen: (open: boolean) => void
   dismissToast: () => void
@@ -145,6 +148,7 @@ function initial(): SimData {
     appState: {},
     nextId: 419,
     view: { kind: 'home' },
+    theme: savedTheme(),
     powerMachine: 'M6',
     phoneOpen: false,
     scenariosOpen: false,
@@ -182,11 +186,16 @@ export const useStore = create<Store>()((set, get) => ({
   },
 
   setSpeed: (speed) => set({ speed, lastTickAt: Date.now() }),
-  reset: () => set({ ...initial() }),
+  reset: () => set({ ...initial(), theme: get().theme }),
   setRate: (ratePerKWh) => set({ ratePerKWh }),
   go: (view) => set({ view }),
   openApp: (app) => set({ view: { kind: 'app', app } }),
   setPhoneOpen: (phoneOpen) => set({ phoneOpen }),
+  toggleTheme: () => {
+    const theme = get().theme === 'dark' ? 'light' : 'dark'
+    applyTheme(theme)
+    set({ theme })
+  },
   setPowerMachine: (powerMachine) => set({ powerMachine }),
   setScenariosOpen: (scenariosOpen) => set({ scenariosOpen }),
   dismissToast: () => set({ toast: null }),

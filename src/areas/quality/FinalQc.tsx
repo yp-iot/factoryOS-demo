@@ -5,6 +5,7 @@ import { AppHeader, Button, Card } from '../../components/ui'
 import { clock, date } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { statusOf } from '../../sim/orders'
+import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
 
 interface Inspection {
@@ -37,6 +38,7 @@ export function FinalQc() {
   const [wo, setWo] = useState(orders[0]?.id ?? '')
   const [sample, setSample] = useState(50)
   const [defects, setDefects] = useState(0)
+  const c = useChartColors()
 
   const todayRate = Math.round((list.filter((i) => i.pass).length / list.length) * 100)
   const chart = [...WEEK.map((v, i) => ({ day: date(now - (7 - i) * 86400000).split(' ')[0], rate: v })), { day: 'Today', rate: todayRate }]
@@ -94,13 +96,13 @@ export function FinalQc() {
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chart} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
-                <CartesianGrid vertical={false} stroke="#24384e" />
-                <XAxis dataKey="day" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
-                <YAxis domain={[60, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} unit="%" width={52} />
-                <ReferenceLine y={95} stroke="#f59e0b" strokeDasharray="4 4" label={{ value: 'Goal 95%', fill: '#f59e0b', fontSize: 10, position: 'insideTopLeft' }} />
+                <CartesianGrid vertical={false} stroke={c.grid} />
+                <XAxis dataKey="day" tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={{ stroke: c.grid }} />
+                <YAxis domain={[60, 100]} tick={{ fill: c.tick, fontSize: 11 }} tickLine={false} axisLine={false} unit="%" width={52} />
+                <ReferenceLine y={95} stroke={c.idle} strokeDasharray="4 4" label={{ value: 'Goal 95%', fill: c.idle, fontSize: 10, position: 'insideTopLeft' }} />
                 <Bar dataKey="rate" isAnimationActive={false}>
                   {chart.map((d) => (
-                    <Cell key={d.day} fill={d.day === 'Today' ? '#f59e0b' : '#22c55e'} />
+                    <Cell key={d.day} fill={d.day === 'Today' ? c.idle : c.run} />
                   ))}
                 </Bar>
               </BarChart>

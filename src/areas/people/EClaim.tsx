@@ -102,7 +102,7 @@ export function EClaim() {
 
         {/* 2 · Approve, on the approver's phone */}
         {!phoneOpen && (
-        <div className="mx-auto flex h-[32rem] w-full max-w-[16rem] flex-col rounded-[2rem] border-[6px] border-slate-700 bg-black p-2">
+        <div data-theme="dark" className="mx-auto flex h-[32rem] w-full max-w-[16rem] flex-col rounded-[2rem] text-ink border-[6px] border-slate-700 bg-black p-2">
           <div className="flex items-center justify-between px-3 pb-2 text-xs font-semibold">
             <span className="tabular">{clock(now)}</span>
             <span className="flex gap-1">
