@@ -13,25 +13,25 @@ function DoPaper({ d, scanning = false }: { d: DoSample; scanning?: boolean }) {
   return (
     <svg viewBox="0 0 300 380" className="w-full rounded-md shadow-lg shadow-black/40">
       <rect width="300" height="380" fill="#f8f5ee" />
-      <text x="16" y="30" fontSize="14" fontWeight="800" fill="#1e293b">{d.supplier}</text>
+      <text x="16" y="30" fontSize="14" fontWeight="800" fill="#16304a">{d.supplier}</text>
       <text x="16" y="44" fontSize="7" fill="#64748b">{d.address}</text>
-      <rect x="196" y="16" width="88" height="34" fill="none" stroke="#1e293b" />
-      <text x="202" y="29" fontSize="8" fontWeight="700" fill="#1e293b">DELIVERY ORDER</text>
-      <text x="202" y="43" fontSize="9" fill="#1e293b">No: {d.doNo}</text>
+      <rect x="196" y="16" width="88" height="34" fill="none" stroke="#16304a" />
+      <text x="202" y="29" fontSize="8" fontWeight="700" fill="#16304a">DELIVERY ORDER</text>
+      <text x="202" y="43" fontSize="9" fill="#16304a">No: {d.doNo}</text>
       <text x="16" y="70" fontSize="8" fill="#334155">Deliver to: Demo Plastics Sdn Bhd</text>
       <text x="16" y="82" fontSize="8" fill="#334155">Date: {d.date}    Lorry: {d.lorry}</text>
       <rect x="16" y="94" width="268" height="16" fill="#e2e8f0" />
       {['Code', 'Description', 'Packing', 'Qty'].map((h, i) => (
-        <text key={h} x={[20, 70, 170, 250][i]} y="105" fontSize="7.5" fontWeight="700" fill="#1e293b">
+        <text key={h} x={[20, 70, 170, 250][i]} y="105" fontSize="7.5" fontWeight="700" fill="#16304a">
           {h}
         </text>
       ))}
       {d.lines.map((l, i) => (
         <g key={l.code} transform={`translate(0 ${122 + i * 20})`}>
-          <text x="20" y="0" fontSize="7.5" fill="#1e293b">{l.code}</text>
-          <text x="70" y="0" fontSize="7.5" fill="#1e293b">{l.desc}</text>
-          <text x="170" y="0" fontSize="7.5" fill="#1e293b">{l.packs}</text>
-          <text x="250" y="0" fontSize="7.5" fill="#1e293b">{num(l.qty)}</text>
+          <text x="20" y="0" fontSize="7.5" fill="#16304a">{l.code}</text>
+          <text x="70" y="0" fontSize="7.5" fill="#16304a">{l.desc}</text>
+          <text x="170" y="0" fontSize="7.5" fill="#16304a">{l.packs}</text>
+          <text x="250" y="0" fontSize="7.5" fill="#16304a">{num(l.qty)}</text>
           <line x1="16" x2="284" y1="7" y2="7" stroke="#cbd5e1" />
         </g>
       ))}

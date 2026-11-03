@@ -102,7 +102,7 @@ function MachineStrip() {
   return (
     <Card className="p-3">
       <div className="mb-2 flex items-center justify-between px-1">
-        <span className="text-sm font-semibold tracking-wide text-dim uppercase">Machines now</span>
+        <span className="text-sm font-bold tracking-[0.18em] text-accent uppercase">Machines now</span>
         <span className="text-xs text-dim">Output today · good parts</span>
       </div>
       <div className="grid grid-cols-7 gap-2">

@@ -11,7 +11,7 @@ function Gauge({ value }: { value: number }) {
   const len = Math.PI * r
   return (
     <svg viewBox="0 0 120 70" className="w-full">
-      <path d="M 8 62 A 52 52 0 0 1 112 62" fill="none" stroke="#253049" strokeWidth="11" strokeLinecap="round" />
+      <path d="M 8 62 A 52 52 0 0 1 112 62" fill="none" stroke="#24384e" strokeWidth="11" strokeLinecap="round" />
       <path
         d="M 8 62 A 52 52 0 0 1 112 62"
         fill="none"

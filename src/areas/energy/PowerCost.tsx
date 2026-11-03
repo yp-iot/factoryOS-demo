@@ -137,12 +137,12 @@ function MachineDay({ m, rate }: { m: Machine; rate: number }) {
       <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barCategoryGap={1} margin={{ top: 4, right: 4, bottom: 0, left: -18 }}>
-            <CartesianGrid vertical={false} stroke="#253049" />
-            <XAxis dataKey="label" interval={15} tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#253049' }} />
+            <CartesianGrid vertical={false} stroke="#24384e" />
+            <XAxis dataKey="label" interval={15} tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
             <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} unit=" kW" width={64} />
             <Tooltip
               cursor={{ fill: 'rgb(255 255 255 / 0.05)' }}
-              contentStyle={{ background: '#111827', border: '1px solid #253049', borderRadius: 8 }}
+              contentStyle={{ background: '#12263c', border: '1px solid #24384e', borderRadius: 8 }}
               labelStyle={{ color: '#e8edf6' }}
               formatter={(v, _n, item) => [`${num(Number(v), 1)} kW · ${STATUS_LABEL[(item.payload as { status: RunState }).status]}`, '']}
               separator=""

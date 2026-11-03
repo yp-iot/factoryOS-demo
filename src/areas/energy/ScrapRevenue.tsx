@@ -59,10 +59,10 @@ export function ScrapRevenue() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={months} margin={{ top: 4, right: 4, bottom: 0, left: -10 }}>
-                <CartesianGrid vertical={false} stroke="#253049" />
-                <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#253049' }} />
+                <CartesianGrid vertical={false} stroke="#24384e" />
+                <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
                 <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} width={50} />
-                <Tooltip cursor={{ fill: 'rgb(255 255 255 / 0.05)' }} contentStyle={{ background: '#111827', border: '1px solid #253049', borderRadius: 8 }} formatter={(v) => [rm(Number(v), 0), 'Sold']} />
+                <Tooltip cursor={{ fill: 'rgb(255 255 255 / 0.05)' }} contentStyle={{ background: '#12263c', border: '1px solid #24384e', borderRadius: 8 }} formatter={(v) => [rm(Number(v), 0), 'Sold']} />
                 <Bar dataKey="rm" fill="#38bdf8" radius={[4, 4, 0, 0]} isAnimationActive={false} />
               </BarChart>
             </ResponsiveContainer>

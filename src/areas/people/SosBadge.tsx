@@ -47,7 +47,7 @@ export function SosBadge() {
       <div className="grid grid-cols-[minmax(0,1fr)_16rem] gap-4">
         <Card className="p-3">
           <svg viewBox="0 0 100 62" className="w-full">
-            <rect width="100" height="62" fill="#0b1322" rx="1.5" />
+            <rect width="100" height="62" fill="#0a1a2c" rx="1.5" />
             {FLOOR_ZONES.map((z) => (
               <g key={z.id}>
                 <rect
@@ -56,8 +56,8 @@ export function SosBadge() {
                   width={z.w}
                   height={z.h * 0.6}
                   rx="0.8"
-                  fill={active && active.zone === z.name ? 'rgb(239 68 68 / 0.18)' : '#152036'}
-                  stroke={active && active.zone === z.name ? '#ef4444' : '#253049'}
+                  fill={active && active.zone === z.name ? 'rgb(239 68 68 / 0.18)' : '#15293f'}
+                  stroke={active && active.zone === z.name ? '#ef4444' : '#24384e'}
                   strokeWidth="0.3"
                 />
                 <text x={z.x + 1.2} y={z.y * 0.6 + 2.6} fontSize="1.7" fill="#64748b">

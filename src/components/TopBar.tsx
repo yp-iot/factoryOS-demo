@@ -12,10 +12,16 @@ export function TopBar() {
   const { speed, setSpeed, reset, phoneOpen, setPhoneOpen, setScenariosOpen, go } = useStore()
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-4 border-b border-line bg-panel px-4">
-      <button onClick={() => go({ kind: 'home' })} className="flex items-center gap-2">
-        <span className="grid h-9 w-9 place-items-center rounded-lg bg-accent text-sm font-black text-black">IX</span>
-        <span className="text-sm leading-tight font-black tracking-widest">IOTRONIX</span>
+    <header className="relative flex h-16 shrink-0 items-center gap-4 border-b border-line bg-panel px-4">
+      <div className="hazard absolute inset-x-0 top-0 h-1" />
+      <button onClick={() => go({ kind: 'home' })} className="flex items-center gap-2.5">
+        <img src="/factoryos-mark.png" alt="" className="h-10 w-10 rounded-[22%]" />
+        <span className="text-left leading-none">
+          <span className="block text-xl font-extrabold tracking-tight">
+            Factory<span className="text-accent">OS</span>
+          </span>
+          <span className="text-[10px] font-semibold tracking-[0.18em] text-dim uppercase">by Iotronix</span>
+        </span>
       </button>
       <div className="h-8 w-px bg-line" />
       <div className="leading-tight">

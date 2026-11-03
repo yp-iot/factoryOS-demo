@@ -89,9 +89,9 @@ export function AiCamera() {
             <Camera size={16} className="text-accent" /> Camera 1 · M5 · Wall switch cover
             <span className="ml-auto text-xs text-dim">{moving ? 'Inspecting' : 'Line stopped'}</span>
           </div>
-          <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg bg-[#0b1322]">
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg bg-[#0a1a2c]">
             {/* conveyor */}
-            <rect x="0" y="90" width={W} height="90" fill="#1e293b" />
+            <rect x="0" y="90" width={W} height="90" fill="#16304a" />
             {Array.from({ length: 17 }, (_, i) => {
               const off = ((conveyor / 25) % 40) - 40
               return <rect key={i} x={i * 40 + off} y="176" width="20" height="4" fill="#334155" />
@@ -111,7 +111,7 @@ export function AiCamera() {
                     <>
                       <rect x={x - 6} y="99" width="72" height="72" fill="none" stroke={p.defect ? '#ef4444' : '#22c55e'} strokeWidth="2.5" rx="4" />
                       <rect x={x - 6} y="80" width={p.defect ? 92 : 40} height="17" rx="3" fill={p.defect ? '#ef4444' : '#22c55e'} />
-                      <text x={x} y="92" fontSize="11" fontWeight="700" fill="#0b1220">
+                      <text x={x} y="92" fontSize="11" fontWeight="700" fill="#0b1f33">
                         {p.defect ? `${p.defect.toUpperCase()}` : 'OK'}
                       </text>
                     </>

@@ -75,10 +75,10 @@ export function DailyProduction() {
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chart} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
-                <CartesianGrid vertical={false} stroke="#253049" />
-                <XAxis dataKey="id" tick={{ fill: '#94a3b8', fontSize: 12 }} tickLine={false} axisLine={{ stroke: '#253049' }} />
+                <CartesianGrid vertical={false} stroke="#24384e" />
+                <XAxis dataKey="id" tick={{ fill: '#94a3b8', fontSize: 12 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
                 <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} unit="%" width={52} />
-                <Tooltip cursor={{ fill: 'rgb(255 255 255 / 0.05)' }} contentStyle={{ background: '#111827', border: '1px solid #253049', borderRadius: 8 }} />
+                <Tooltip cursor={{ fill: 'rgb(255 255 255 / 0.05)' }} contentStyle={{ background: '#12263c', border: '1px solid #24384e', borderRadius: 8 }} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
                 <Bar dataKey="Target" fill="#334155" isAnimationActive={false} />
                 <Bar dataKey="Actual" fill="#22c55e" isAnimationActive={false} />

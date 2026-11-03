@@ -87,7 +87,7 @@ function Prediction() {
         <div className="h-36 w-80 shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={forecast} margin={{ top: 8, right: 8, bottom: 0, left: -10 }}>
-              <XAxis dataKey="label" interval={0} tick={{ fill: '#94a3b8', fontSize: 10 }} tickLine={false} axisLine={{ stroke: '#253049' }} />
+              <XAxis dataKey="label" interval={0} tick={{ fill: '#94a3b8', fontSize: 10 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
               <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} tickLine={false} axisLine={false} width={48} />
               <ReferenceLine y={m.reorderLevel} stroke="#f59e0b" strokeDasharray="4 4" label={{ value: 'Reorder', fill: '#f59e0b', fontSize: 10, position: 'insideTopRight' }} />
               <Line dataKey="kg" stroke="#38bdf8" strokeWidth={2.5} dot={false} isAnimationActive={false} />

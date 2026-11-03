@@ -94,8 +94,8 @@ export function FinalQc() {
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chart} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
-                <CartesianGrid vertical={false} stroke="#253049" />
-                <XAxis dataKey="day" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#253049' }} />
+                <CartesianGrid vertical={false} stroke="#24384e" />
+                <XAxis dataKey="day" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#24384e' }} />
                 <YAxis domain={[60, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} unit="%" width={52} />
                 <ReferenceLine y={95} stroke="#f59e0b" strokeDasharray="4 4" label={{ value: 'Goal 95%', fill: '#f59e0b', fontSize: 10, position: 'insideTopLeft' }} />
                 <Bar dataKey="rate" isAnimationActive={false}>
