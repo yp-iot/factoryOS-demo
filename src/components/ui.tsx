@@ -89,14 +89,14 @@ export function AppHeader({ app, children }: { app: AppId; children?: ReactNode 
   // The area page card already shows the name and blurb above the preview.
   if (useIsPreview()) return null
   return (
-    <div className="mb-4 flex items-center gap-4">
+    <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-3">
       <button
         onClick={() => go({ kind: 'area', area: meta.area.id })}
         className="flex items-center gap-1 rounded-lg border border-line px-2.5 py-1.5 text-sm text-dim hover:text-ink"
       >
         <ArrowLeft size={16} /> {meta.area.name}
       </button>
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 basis-60">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <h1 className="text-2xl font-bold">{meta.name}</h1>
           {meta.hero && <HeroChip />}

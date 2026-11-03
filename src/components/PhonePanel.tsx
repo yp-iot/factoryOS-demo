@@ -51,7 +51,9 @@ export function PhonePanel() {
   const now = useSimNow(1000)
   if (!open) return null
   return (
-    <aside className="flex w-80 shrink-0 flex-col items-center border-l border-line bg-panel px-4 py-4">
+    // Over the page on a phone, below the top bar (the demo badge stays visible) and
+    // under the scenario caption; a side panel on a wide screen.
+    <aside className="fixed inset-x-0 top-14 bottom-0 z-20 flex flex-col items-center bg-panel px-4 py-4 lg:static lg:z-auto lg:w-80 lg:shrink-0 lg:border-l lg:border-line">
       <div className="mb-3 flex w-full items-center justify-between">
         <span className="text-sm font-semibold text-dim">Phone view</span>
         <button onClick={() => setOpen(false)} className="text-dim hover:text-ink" aria-label="Close phone view">
@@ -97,7 +99,7 @@ export function Toast() {
         setPhoneOpen(true)
         dismiss()
       }}
-      className="fixed top-20 right-6 z-50 w-80 cursor-pointer text-left"
+      className="fixed top-16 right-4 left-4 z-50 cursor-pointer text-left sm:left-auto sm:w-80 lg:top-20 lg:right-6"
     >
       <div data-theme="dark" className="rounded-2xl bg-slate-900 text-ink shadow-2xl shadow-black/60">
         <Message m={toast} />

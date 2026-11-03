@@ -41,7 +41,7 @@ export function ScrapRevenue() {
   return (
     <div>
       <AppHeader app="scrap-revenue" />
-      <div className="mb-4 grid grid-cols-4 gap-4">
+      <div className="mb-4 grid grid-cols-2 gap-4 @3xl:grid-cols-4">
         <Card>
           <Stat label="Sold this month" value={rm(thisMonth, 0)} />
         </Card>

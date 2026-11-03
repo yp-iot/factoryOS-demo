@@ -44,7 +44,7 @@ export function SosBadge() {
         </Card>
       )}
 
-      <div className="grid grid-cols-[minmax(0,1fr)_16rem] gap-4">
+      <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-[minmax(0,1fr)_16rem]">
         <Card className="p-3">
           <svg viewBox="0 0 100 62" className="w-full">
             <rect width="100" height="62" fill="#0a1a2c" rx="1.5" />

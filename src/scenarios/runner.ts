@@ -95,3 +95,11 @@ export function stopScenario() {
   active = null
   useStore.getState().setScenario(null)
 }
+
+/**
+ * Opens the side phone view during a scenario on a wide screen. On a phone it would
+ * cover the screen the presenter has to tap, so the message drops in as a toast instead.
+ */
+export function showPhone() {
+  if (window.matchMedia('(min-width: 1024px)').matches) useStore.getState().setPhoneOpen(true)
+}

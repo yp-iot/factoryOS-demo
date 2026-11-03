@@ -1,7 +1,7 @@
 import { rm } from '../lib/format'
 import { useStore } from '../sim/store'
 import type { Speed } from '../sim/types'
-import type { Scenario } from './runner'
+import { showPhone, type Scenario } from './runner'
 
 const st = () => useStore.getState()
 
@@ -39,7 +39,7 @@ export function powerBillShock(): Scenario {
           const s = st()
           s.setSpeed(speedBefore || 1)
           const p1 = s.machines.find((m) => m.id === 'P1')!
-          s.setPhoneOpen(true)
+          showPhone()
           s.notify(
             {
               to: 'Owner',

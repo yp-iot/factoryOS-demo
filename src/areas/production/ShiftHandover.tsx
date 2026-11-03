@@ -37,7 +37,7 @@ export function ShiftHandover() {
             <FileText size={16} /> Drafted automatically at {clock(now)}
           </div>
           <h2 className="mb-3 text-2xl font-bold">Shift {shift} handover</h2>
-          <div className="mb-4 grid grid-cols-4 gap-3">
+          <div className="mb-4 grid grid-cols-2 gap-3 @3xl:grid-cols-4">
             {[
               ['Good parts', num(good)],
               ['Rejects', num(scrap)],

@@ -69,7 +69,7 @@ function OpenBreakdown({ b }: { b: Breakdown }) {
 
   return (
     <Card className="border-stop/70 bg-stop/[0.06]">
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
         <StatusLight status="stop" size="lg" />
         <span className="text-3xl font-black">{b.machineId}</span>
         <span className="text-dim">{machine.part}</span>
@@ -78,7 +78,7 @@ function OpenBreakdown({ b }: { b: Breakdown }) {
         </span>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-4 @3xl:grid-cols-4">
         <div>
           <div className="text-xs font-medium tracking-wide text-dim uppercase">Stopped at</div>
           <div className="tabular text-3xl font-bold">{clock(b.start)}</div>
@@ -120,7 +120,7 @@ function OpenBreakdown({ b }: { b: Breakdown }) {
             </button>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-end gap-3">
+        <div className="mt-4 flex flex-wrap items-center justify-end gap-3">
           {!b.reason && <span className="text-sm text-dim">Pick a reason first</span>}
           <Button variant="ok" disabled={!b.reason} onClick={() => resolve(b.id)} className="px-6 py-2.5 text-base">
             <CheckCircle2 size={18} /> Resolved
@@ -136,9 +136,9 @@ function AllClear() {
   const report = useStore((s) => s.reportBreakdown)
   const [machine, setMachine] = useState<MachineId>('M1')
   return (
-    <Card className="flex items-center gap-4 border-run/40">
+    <Card className="flex flex-wrap items-center gap-4 border-run/40">
       <CheckCircle2 className="text-run" size={32} />
-      <div className="flex-1">
+      <div className="min-w-[12rem] flex-1">
         <div className="text-lg font-semibold">No open breakdowns</div>
         <div className="text-sm text-dim">When a machine stops, its report opens here by itself.</div>
       </div>

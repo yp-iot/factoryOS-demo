@@ -1,7 +1,7 @@
 import { decideClaim, setOnLeave, submitClaim } from '../sim/ops'
 import { BACKUP_SUPERVISOR, SUPERVISOR } from '../sim/seedOps'
 import { useStore } from '../sim/store'
-import type { Scenario } from './runner'
+import { showPhone, type Scenario } from './runner'
 
 const st = () => useStore.getState()
 
@@ -30,7 +30,7 @@ export function supervisorOnLeave(): Scenario {
         caption: `An overtime claim comes in. It goes to ${BACKUP_SUPERVISOR}’s phone.`,
         run: () => {
           st().openApp('e-claim')
-          st().setPhoneOpen(true)
+          showPhone()
           claimId = submitClaim({ worker: 'Siti', kind: 'Overtime', detail: 'Today, 2 h after shift A, M3 restart', amount: '2.0 h' })
         },
         wait: 3500,

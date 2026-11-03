@@ -30,7 +30,7 @@ export function WorkOrders() {
         </Button>
       </AppHeader>
 
-      <div className="mb-4 flex gap-3">
+      <div className="mb-4 flex flex-wrap gap-3">
         {ORDER.map((st) => (
           <div key={st} className="flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-2">
             <span className={`rounded px-2 py-0.5 text-xs font-semibold ${STATUS[st].chip}`}>{STATUS[st].label}</span>

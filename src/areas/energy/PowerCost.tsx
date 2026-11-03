@@ -25,7 +25,7 @@ export function PowerCost() {
   return (
     <div>
       <AppHeader app="power-cost" />
-      <div className="mb-4 grid grid-cols-3 gap-4 @5xl:grid-cols-5">
+      <div className="mb-4 grid grid-cols-2 gap-4 @3xl:grid-cols-3 @5xl:grid-cols-5">
         <Card>
           <Stat label="Power cost today" value={rm(totalKWh * rate)} sub={`${num(totalKWh)} kWh since 07:00`} />
         </Card>

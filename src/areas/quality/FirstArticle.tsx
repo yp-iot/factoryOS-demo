@@ -41,7 +41,7 @@ export function FirstArticle() {
   return (
     <div>
       <AppHeader app="first-article" />
-      <div className="grid grid-cols-[18rem_minmax(0,1fr)] gap-4">
+      <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-[18rem_minmax(0,1fr)]">
         <Card className="p-2">
           <div className="px-2 py-1 text-xs text-dim uppercase">Waiting to start</div>
           {orders.map((o) => {

@@ -15,7 +15,7 @@ export function AreaPage({ area }: { area: AreaId }) {
         </span>
         <h1 className="text-3xl font-bold">{meta.name}</h1>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {meta.apps.map((app) => (
           // A div, not a button: the live preview inside holds buttons of its own.
           <div

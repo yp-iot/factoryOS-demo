@@ -48,7 +48,7 @@ export function VoiceWarehouse() {
   return (
     <div>
       <AppHeader app="voice-warehouse" />
-      <div className="grid grid-cols-[minmax(0,1fr)_18rem] gap-4">
+      <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-[minmax(0,1fr)_18rem]">
         <Card className="flex h-[30rem] flex-col">
           <div className="mb-2 flex items-center gap-2 text-sm text-dim">
             <Headphones size={16} /> Headset 3 · Zul · Raw material store

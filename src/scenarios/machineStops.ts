@@ -1,6 +1,6 @@
 import { useStore } from '../sim/store'
 import type { Speed } from '../sim/types'
-import type { Scenario } from './runner'
+import { showPhone, type Scenario } from './runner'
 
 const st = () => useStore.getState()
 
@@ -40,7 +40,7 @@ export function machineStops(): Scenario {
         caption: 'Technician Ali gets the alert on the phone straight away.',
         run: () => {
           const s = st()
-          s.setPhoneOpen(true)
+          showPhone()
           s.notify({ to: 'Technician', title: 'Technician Ali', body: 'M3 stopped, mould temp alarm', tone: 'alert' }, { toast: true })
         },
         wait: 4500,

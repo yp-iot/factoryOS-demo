@@ -20,7 +20,7 @@ export function GoodsReceived() {
   return (
     <div>
       <AppHeader app="grn" />
-      <div className="mb-4 grid grid-cols-4 gap-4">
+      <div className="mb-4 grid grid-cols-2 gap-4 @3xl:grid-cols-4">
         {materials.map((m) => (
           <Card key={m.id} className="py-3">
             <div className="text-xs text-dim uppercase">{m.name} in store</div>

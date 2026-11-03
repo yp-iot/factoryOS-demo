@@ -9,7 +9,7 @@ export function ScenariosPanel() {
   if (!open) return null
   return (
     <div className="fixed inset-0 z-40 flex justify-end bg-black/50" onClick={() => setOpen(false)}>
-      <aside className="slide-in flex h-full w-[26rem] flex-col border-l border-line bg-panel p-5" onClick={(e) => e.stopPropagation()}>
+      <aside className="slide-in flex h-full w-full max-w-[26rem] flex-col border-l border-line bg-panel p-5" onClick={(e) => e.stopPropagation()}>
         <div className="mb-1 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Scenarios</h2>
           <button onClick={() => setOpen(false)} className="text-dim hover:text-ink" aria-label="Close">
@@ -49,17 +49,17 @@ export function ScenarioCaption() {
   const sc = useStore((s) => s.scenario)
   if (!sc) return null
   return (
-    <div className="fixed bottom-5 left-1/2 z-30 w-[min(56rem,calc(100vw-2rem))] -translate-x-1/2">
-      <div className="slide-in flex items-center gap-4 rounded-2xl border border-accent/60 bg-panel/95 px-5 py-4 shadow-2xl shadow-black/60 backdrop-blur">
+    <div className="fixed bottom-3 left-1/2 z-30 w-[min(56rem,calc(100vw-1.5rem))] lg:bottom-5 -translate-x-1/2">
+      <div className="slide-in flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-accent/60 bg-panel/95 px-4 py-3 lg:px-5 lg:py-4 shadow-2xl shadow-black/60 backdrop-blur">
         <div className="shrink-0 text-center">
           <div className="text-[10px] font-semibold tracking-wider text-accent uppercase">{sc.title}</div>
           <div className="tabular text-lg font-bold">
             {sc.step}/{sc.total}
           </div>
         </div>
-        <div className="h-10 w-px bg-line" />
-        <div className="flex-1">
-          <div className="text-lg leading-snug font-semibold" key={sc.caption}>
+        <div className="hidden h-10 w-px bg-line sm:block" />
+        <div className="min-w-[12rem] flex-1">
+          <div className="text-base leading-snug lg:text-lg font-semibold" key={sc.caption}>
             {sc.caption}
           </div>
           {sc.hint && <div className="mt-0.5 text-sm text-accent">{sc.hint}</div>}

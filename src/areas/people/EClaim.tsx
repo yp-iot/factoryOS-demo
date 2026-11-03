@@ -27,7 +27,7 @@ export function EClaim() {
   return (
     <div>
       <AppHeader app="e-claim" />
-      <div className={`grid gap-4 ${phoneOpen ? 'grid-cols-1' : 'grid-cols-[minmax(0,1fr)_17rem]'}`}>
+      <div className={`grid gap-4 ${phoneOpen ? 'grid-cols-1' : 'grid-cols-1 @4xl:grid-cols-[minmax(0,1fr)_17rem]'}`}>
         <div className="flex flex-col gap-4">
           <Card>
             <h2 className="mb-3 font-semibold">1 · Submit</h2>

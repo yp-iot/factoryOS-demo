@@ -1,6 +1,6 @@
 import { clearSos, raiseSos } from '../sim/ops'
 import { useStore } from '../sim/store'
-import type { Scenario } from './runner'
+import { showPhone, type Scenario } from './runner'
 
 const st = () => useStore.getState()
 
@@ -24,7 +24,7 @@ export function workerSos(): Scenario {
         caption: 'Aminah presses SOS in the raw material store.',
         run: () => {
           alertId = raiseSos('Aminah')
-          st().setPhoneOpen(true)
+          showPhone()
         },
         wait: 3500,
       },

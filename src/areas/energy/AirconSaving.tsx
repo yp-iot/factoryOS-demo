@@ -49,7 +49,7 @@ export function AirconSaving() {
           </span>
         </button>
       </AppHeader>
-      <div className="grid grid-cols-2 gap-4 @4xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2 @4xl:grid-cols-3">
         {zones.map((z) => (
           <Card key={z.name} className={z.on ? '' : 'opacity-70'}>
             <div className="flex items-center justify-between">

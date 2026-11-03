@@ -1,7 +1,7 @@
 import { AppScreen } from './areas/screens'
 import { PhonePanel, Toast } from './components/PhonePanel'
 import { ScenarioCaption, ScenariosPanel } from './components/ScenariosPanel'
-import { Sidebar } from './components/Sidebar'
+import { MobileNav, Sidebar } from './components/Sidebar'
 import { TopBar } from './components/TopBar'
 import { useSimLoop } from './sim/hooks'
 import { useStore } from './sim/store'
@@ -15,11 +15,12 @@ export default function App() {
   const key = view.kind === 'home' ? 'home' : view.kind === 'area' ? view.area : view.app
 
   return (
-    <div className="flex h-screen min-h-[720px] min-w-[1280px] flex-col">
+    <div className="flex h-dvh flex-col lg:min-h-[720px]">
       <TopBar />
+      <MobileNav />
       <div className="flex min-h-0 flex-1">
         <Sidebar />
-        <main key={key} className={`@container min-w-0 flex-1 overflow-y-auto p-5 ${scenario ? 'pb-32' : ''}`}>
+        <main key={key} className={`@container min-w-0 flex-1 overflow-y-auto p-4 lg:p-5 ${scenario ? 'pb-48 lg:pb-32' : ''}`}>
           {view.kind === 'home' && <Home />}
           {view.kind === 'area' && <AreaPage area={view.area} />}
           {view.kind === 'app' && <AppScreen app={view.app} />}

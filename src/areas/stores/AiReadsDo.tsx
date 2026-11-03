@@ -98,7 +98,7 @@ export function AiReadsDo() {
               <Upload size={18} /> Upload DO
             </Button>
           ) : (
-            <div className="grid w-full max-w-3xl grid-cols-3 gap-4">
+            <div className="grid w-full max-w-3xl grid-cols-1 gap-4 @2xl:grid-cols-3">
               {DO_SAMPLES.map((s, i) => (
                 <button key={s.doNo} onClick={() => start(i)} className="rounded-lg border border-line p-2 text-left hover:border-accent">
                   <DoPaper d={s} />
@@ -124,7 +124,7 @@ export function AiReadsDo() {
   return (
     <div>
       <AppHeader app="ai-do" />
-      <div className="grid grid-cols-[minmax(0,22rem)_minmax(0,1fr)] gap-4">
+      <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
         <Card className="p-3">
           <DoPaper d={d} scanning={stage === 'reading'} />
         </Card>

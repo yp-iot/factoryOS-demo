@@ -57,6 +57,20 @@ html {
   }
 }
 
+/* On a phone a wide table scrolls sideways inside its card instead of
+   pushing the whole page wider than the screen. */
+@media (max-width: 767px) {
+  main table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  main table td,
+  main table th {
+    padding-right: 1rem;
+  }
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -99,4 +113,12 @@ body {
 /* The amber hazard stripe across the top of the FactoryOS poster. */
 .hazard {
   background: repeating-linear-gradient(-45deg, #f5a623 0 14px, #0b1f33 14px 28px);
+}
+
+/* Rows you swipe sideways (phone tabs, the machine strip) don't need a visible bar. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
