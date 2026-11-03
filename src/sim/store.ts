@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { syncToRealTime } from '../lib/format'
 import { applyTheme, savedTheme, type Theme } from '../lib/theme'
 import { logPower, nextRandom, oee, tick } from './engine'
 import { progressOrders, suggestMaterial } from './orders'
@@ -122,6 +123,7 @@ const nextNumber = (rows: { id: string }[]) => Math.max(...rows.map((r) => Numbe
 
 function initial(): SimData {
   const now = startTime()
+  syncToRealTime(now)
   const machines = seedMachines(now)
   return {
     simTime: now,

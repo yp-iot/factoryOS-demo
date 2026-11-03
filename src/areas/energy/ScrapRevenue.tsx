@@ -2,7 +2,7 @@ import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { AppHeader, Button, Card, Stat } from '../../components/ui'
-import { num, rm } from '../../lib/format'
+import { num, rm, shown } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
@@ -33,7 +33,7 @@ export function ScrapRevenue() {
 
   const thisMonth = sales.reduce((a, s) => a + s.kg * s.rmPerKg, 0)
   const months = Array.from({ length: 12 }, (_, i) => {
-    const d = new Date(now)
+    const d = new Date(shown(now))
     d.setMonth(d.getMonth() - (11 - i))
     return { month: d.toLocaleDateString('en-GB', { month: 'short' }), rm: i === 11 ? Math.round(thisMonth) : HISTORY[i] }
   })

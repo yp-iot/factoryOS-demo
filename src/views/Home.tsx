@@ -2,7 +2,7 @@ import { Activity, ArrowUpRight, Gauge, Package, Zap, type LucideIcon } from 'lu
 import type { ReactNode } from 'react'
 import { AREAS } from '../areas/registry'
 import { Card, STATUS_COLOR, STATUS_LABEL, STATUS_TEXT, StatusLight } from '../components/ui'
-import { date, num, pct, rm, shiftOf } from '../lib/format'
+import { date, num, pct, rm, shiftOf, shown } from '../lib/format'
 import { dailyUsage, plantOee } from '../sim/engine'
 import { useSimNow } from '../sim/hooks'
 import { dayStart } from '../sim/seed'
@@ -67,7 +67,7 @@ function figures(area: AreaId, s: Store): Figure[] {
 }
 
 const greeting = (t: number) => {
-  const h = new Date(t).getHours()
+  const h = new Date(shown(t)).getHours()
   return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'
 }
 

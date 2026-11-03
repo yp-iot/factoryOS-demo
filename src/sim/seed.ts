@@ -1,7 +1,7 @@
 import { bucketOf, LOG_MS, timeInStatus } from './engine'
 import type { Breakdown, KwSample, Machine, MachineId, Material, MaterialRequest, PhoneMessage, RunState, Segment, WorkOrder } from './types'
 
-/** The demo always opens at 09:30 on today's date, 2.5 hours into shift A. */
+/** The story always opens at 09:30, 2.5 hours into shift A. The screen shows it at the real time (lib/format shown). */
 export function startTime() {
   const d = new Date()
   d.setHours(9, 30, 0, 0)

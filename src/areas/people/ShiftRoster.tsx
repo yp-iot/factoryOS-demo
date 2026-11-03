@@ -1,4 +1,5 @@
 import { AppHeader, Card } from '../../components/ui'
+import { shown } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { useStore } from '../../sim/store'
 
@@ -21,14 +22,14 @@ function seed(): Cell[][] {
 export function ShiftRoster() {
   const now = useStore((s) => s.simTime)
   const [grid, setGrid] = useAppState('roster', seed)
-  const monday = new Date(now)
+  const monday = new Date(shown(now))
   monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7))
   const days = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(monday)
     d.setDate(d.getDate() + i)
     return d
   })
-  const today = (new Date(now).getDay() + 6) % 7
+  const today = (new Date(shown(now)).getDay() + 6) % 7
   const count = (c: Cell) => grid.filter((row) => row[today] === c).length
 
   return (
