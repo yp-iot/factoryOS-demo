@@ -1,4 +1,3 @@
-import { ChevronRight } from 'lucide-react'
 import { areaMeta } from '../areas/registry'
 import { AppPreview } from '../components/AppPreview'
 import { Card, HardwareChip, HeroChip } from '../components/ui'
@@ -31,16 +30,17 @@ export function AreaPage({ area }: { area: AreaId }) {
             }}
             className="group cursor-pointer text-left"
           >
-            <Card className="flex h-full min-h-36 flex-col gap-3 p-5 transition hover:border-accent/60 hover:bg-panel-2">
-              <div className="flex items-start gap-3">
-                <h2 className="flex-1 text-xl font-semibold">{app.name}</h2>
-                <ChevronRight className="mt-1 text-dim" size={20} />
-              </div>
-              <p className="text-dim">{app.blurb}</p>
+            {/* The screen comes first, so a client can pick by what catches their eye. */}
+            <Card className="flex h-full flex-col gap-3 transition group-hover:border-accent/60 group-hover:bg-panel-2">
               <AppPreview app={app.id} />
-              <div className="mt-auto flex gap-2 empty:hidden">
+              <div className="flex flex-wrap items-center gap-2 px-1 pt-1">
+                <span className="rounded-full bg-panel-2 px-2.5 py-1 text-xs font-semibold text-dim group-hover:bg-panel">{meta.name}</span>
                 {app.hero && <HeroChip />}
                 {app.hardware && <HardwareChip />}
+              </div>
+              <div className="px-1 pb-1">
+                <h2 className="mb-1 text-xl font-bold transition group-hover:text-accent">{app.name}</h2>
+                <p className="text-dim">{app.blurb}</p>
               </div>
             </Card>
           </div>

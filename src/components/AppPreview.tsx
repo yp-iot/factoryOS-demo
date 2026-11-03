@@ -22,7 +22,7 @@ export function AppPreview({ app }: { app: AppId }) {
   }, [])
 
   return (
-    <div ref={box} className="relative h-44 overflow-hidden rounded-lg border border-line bg-bg" aria-hidden inert>
+    <div ref={box} className="relative h-60 overflow-hidden rounded-lg border border-line bg-bg" aria-hidden inert>
       <div className="@container pointer-events-none origin-top-left p-4" style={{ width: SCREEN_WIDTH, transform: `scale(${scale})` }}>
         <PreviewContext.Provider value={true}>
           <AppScreen app={app} />
