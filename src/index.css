@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #0a0f1a;
+  --color-panel: #111827;
+  --color-panel-2: #172033;
+  --color-line: #253049;
+  --color-ink: #e8edf6;
+  --color-dim: #94a3b8;
+  --color-run: #22c55e;
+  --color-stop: #ef4444;
+  --color-idle: #f59e0b;
+  --color-accent: #f59e0b;
+  --color-info: #38bdf8;
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  font-size: 15px;
+}
+/* A 1080p TV across a table: scale everything up, since Tailwind sizes in rem. */
+@media (min-width: 1700px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(34 197 94 / 0.7); }
+  70% { box-shadow: 0 0 0 7px rgb(34 197 94 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(34 197 94 / 0); }
+}
+.live-dot {
+  animation: pulse-ring 1.6s infinite;
+}
+
+@keyframes alarm {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(239 68 68 / 0.6); }
+  50% { box-shadow: 0 0 0 8px rgb(239 68 68 / 0); }
+}
+.alarm {
+  animation: alarm 1.2s infinite;
+}
+
+@keyframes slide-in {
+  from { transform: translateY(-12px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #2b3650; border-radius: 4px; }
