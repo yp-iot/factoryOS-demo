@@ -3,38 +3,19 @@ import { AppHeader, Card } from '../../components/ui'
 import { num } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { useStore } from '../../sim/store'
-
-const ZONES = [
-  { name: 'Office', kW: 4.5, base: 8, phase: 0 },
-  { name: 'QC room', kW: 2.5, base: 2, phase: 1.3 },
-  { name: 'Meeting room', kW: 3.5, base: 0, phase: 2.1 },
-  { name: 'Canteen', kW: 5, base: 0, phase: 3.4 },
-  { name: 'Store office', kW: 2, base: 1, phase: 4.2 },
-  { name: 'Server room', kW: 1.5, base: 0, phase: 0, always: true },
-]
-
-/** People in a zone, drifting through the day; a few rooms empty out. */
-function occupancy(base: number, phase: number, t: number) {
-  const wave = Math.sin(t / 1.9e6 + phase)
-  return Math.max(0, Math.round(base + wave * 3))
-}
+import { airconState } from './energyData'
 
 export function AirconSaving() {
   const now = useStore((s) => s.simTime)
   const rate = useStore((s) => s.ratePerKWh)
   const [saving, setSaving] = useAppState('aircon-saving', () => false)
 
-  const zones = ZONES.map((z) => {
-    const people = z.always ? 0 : occupancy(z.base, z.phase, now)
-    const on = z.always || !saving || people > 0
-    const setpoint = saving && !z.always ? 25 : 23
-    const temp = on ? setpoint + Math.sin(now / 7e5 + z.phase) * 0.4 : 27.5 + Math.sin(now / 9e5 + z.phase) * 0.5
-    return { ...z, people, on, setpoint, temp }
-  })
-  // Estimate for a 10-hour working day: empty rooms off, and roughly 6% less per degree raised.
-  const normalKWh = ZONES.reduce((a, z) => a + z.kW * 10, 0)
-  const savingKWh = zones.reduce((a, z) => a + (z.on ? z.kW * 10 * (z.always ? 1 : 0.88) : z.kW * 10 * 0.35), 0)
-  const diff = normalKWh - savingKWh
+  const est = airconState(now, saving)
+  const { diff } = est
+  const zones = est.zones.map((z) => ({
+    ...z,
+    temp: z.on ? z.setpoint + Math.sin(now / 7e5 + z.phase) * 0.4 : 27.5 + Math.sin(now / 9e5 + z.phase) * 0.5,
+  }))
 
   return (
     <div>

@@ -2,10 +2,8 @@ import { AppHeader, Card } from '../../components/ui'
 import { shown } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { useStore } from '../../sim/store'
+import { seedRoster, WORKERS, type Cell } from './peopleData'
 
-type Cell = 'A' | 'B' | 'Off' | 'Leave'
-
-const WORKERS = ['Siti', 'Raju', 'Ah Kow', 'Farah', 'Daniel', 'Ravi', 'Mei Ling', 'Aminah', 'Zul', 'Lim', 'Priya', 'Azman', 'Ali (tech)', 'Kumar (tech)', 'Hafiz (tech)']
 const NEXT: Record<Cell, Cell> = { A: 'B', B: 'Off', Off: 'Leave', Leave: 'A' }
 const STYLE: Record<Cell, string> = {
   A: 'bg-accent/20 text-accent',
@@ -14,14 +12,9 @@ const STYLE: Record<Cell, string> = {
   Leave: 'bg-stop/15 text-stop',
 }
 
-// A rotating pattern: half the team on A, half on B, everyone gets a day off.
-function seed(): Cell[][] {
-  return WORKERS.map((_, w) => Array.from({ length: 7 }, (_, d) => ((d + w) % 7 === 6 ? 'Off' : w % 2 === 0 ? 'A' : 'B') as Cell))
-}
-
 export function ShiftRoster() {
   const now = useStore((s) => s.simTime)
-  const [grid, setGrid] = useAppState('roster', seed)
+  const [grid, setGrid] = useAppState('roster', seedRoster)
   const monday = new Date(shown(now))
   monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7))
   const days = Array.from({ length: 7 }, (_, i) => {

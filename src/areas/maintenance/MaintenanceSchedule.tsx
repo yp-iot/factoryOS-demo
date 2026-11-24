@@ -3,20 +3,9 @@ import { AppHeader, Button, Card } from '../../components/ui'
 import { date } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { useStore } from '../../sim/store'
+import { TASKS } from './maintenanceData'
 
 const DAY = 86400000
-
-// Due dates are days from the demo start; negative means overdue.
-const TASKS = [
-  { id: 'PM-118', machine: 'M4', task: 'Hydraulic oil and filter change', every: 'Every 6 months', dueIn: -3, tech: 'Hafiz' },
-  { id: 'PM-121', machine: 'P1', task: 'Press guard and interlock check', every: 'Monthly', dueIn: -1, tech: 'Ali' },
-  { id: 'PM-119', machine: 'M1', task: 'Mould cleaning and vent check', every: 'Every 2 weeks', dueIn: 0, tech: 'Kumar' },
-  { id: 'PM-122', machine: 'M3', task: 'Heater band and thermocouple check', every: 'Monthly', dueIn: 1, tech: 'Ali' },
-  { id: 'PM-120', machine: 'M2', task: 'Screw and barrel wear check', every: 'Every 3 months', dueIn: 3, tech: 'Hafiz' },
-  { id: 'PM-123', machine: 'Compressor', task: 'Drain and air filter', every: 'Weekly', dueIn: 4, tech: 'Kumar' },
-  { id: 'PM-124', machine: 'M5', task: 'Lubrication of toggle and tie bars', every: 'Monthly', dueIn: 6, tech: 'Ali' },
-  { id: 'PM-125', machine: 'M6', task: 'Chiller water check', every: 'Every 2 weeks', dueIn: 9, tech: 'Kumar' },
-]
 
 export function MaintenanceSchedule() {
   const now = useStore((s) => s.simTime)

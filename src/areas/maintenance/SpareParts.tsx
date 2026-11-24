@@ -1,17 +1,7 @@
 import { AlertTriangle, Check, ShoppingCart } from 'lucide-react'
 import { AppHeader, Button, Card } from '../../components/ui'
 import { useAppState } from '../../sim/hooks'
-
-const PARTS = [
-  { code: 'SP-HB-220', name: 'Heater band 220 V, 60 mm', fits: 'M1–M6', stock: 3, reorder: 6, location: 'Cabinet A2' },
-  { code: 'SP-TC-K', name: 'Thermocouple type K', fits: 'All', stock: 12, reorder: 8, location: 'Cabinet A2' },
-  { code: 'SP-EP-6', name: 'Ejector pin 6 mm', fits: 'M3, M4', stock: 2, reorder: 10, location: 'Cabinet B1' },
-  { code: 'SP-HF-10', name: 'Hydraulic filter 10 µm', fits: 'M2, M4, M6', stock: 4, reorder: 4, location: 'Shelf C' },
-  { code: 'SP-NZ-M5', name: 'Nozzle tip', fits: 'M5', stock: 3, reorder: 2, location: 'Cabinet B1' },
-  { code: 'SP-OR-KIT', name: 'O-ring kit, cooling lines', fits: 'All', stock: 9, reorder: 5, location: 'Cabinet B2' },
-  { code: 'SP-PX-24', name: 'Proximity sensor 24 V', fits: 'P1', stock: 1, reorder: 2, location: 'Cabinet A1' },
-  { code: 'SP-CB-16', name: 'Contactor 16 A', fits: 'All', stock: 5, reorder: 3, location: 'Cabinet A1' },
-]
+import { PARTS } from './maintenanceData'
 
 export function SpareParts() {
   const [ordered, setOrdered] = useAppState<string[]>('spares-ordered', () => [])

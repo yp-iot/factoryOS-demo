@@ -6,27 +6,12 @@ import { num, rm, shown } from '../../lib/format'
 import { useAppState } from '../../sim/hooks'
 import { useChartColors } from '../../lib/theme'
 import { useStore } from '../../sim/store'
-
-interface Sale {
-  id: number
-  t: number
-  type: string
-  kg: number
-  rmPerKg: number
-}
-
-const TYPES = { 'PP regrind': 1.8, 'ABS regrind': 2.6, 'Mixed lumps': 0.9 } as Record<string, number>
-// Past 11 months of scrap sold, RM.
-const HISTORY = [1840, 2120, 1960, 2310, 2050, 1780, 2240, 2400, 2190, 2060, 2280]
+import { HISTORY, seedSales, TYPES, type Sale } from './energyData'
 
 export function ScrapRevenue() {
   const now = useStore((s) => s.simTime)
   const scrapParts = useStore((s) => s.machines.reduce((a, m) => a + (m.scrap * m.partWeightG) / 1000, 0))
-  const [sales, setSales] = useAppState<Sale[]>('scrap-sales', () => [
-    { id: 3, t: now - 2 * 86400000, type: 'PP regrind', kg: 420, rmPerKg: 1.8 },
-    { id: 2, t: now - 9 * 86400000, type: 'ABS regrind', kg: 180, rmPerKg: 2.6 },
-    { id: 1, t: now - 15 * 86400000, type: 'Mixed lumps', kg: 260, rmPerKg: 0.9 },
-  ])
+  const [sales, setSales] = useAppState<Sale[]>('scrap-sales', () => seedSales(now))
   const c = useChartColors()
   const [type, setType] = useState('PP regrind')
   const [kg, setKg] = useState(150)

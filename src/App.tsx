@@ -1,4 +1,5 @@
 import { AppScreen } from './areas/screens'
+import { Assistant } from './components/Assistant'
 import { PhonePanel, Toast } from './components/PhonePanel'
 import { ScenarioCaption, ScenariosPanel } from './components/ScenariosPanel'
 import { MobileNav, Sidebar } from './components/Sidebar'
@@ -30,6 +31,7 @@ export default function App() {
       <ScenariosPanel />
       <ScenarioCaption />
       <Toast />
+      <Assistant />
     </div>
   )
 }
