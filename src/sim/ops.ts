@@ -3,6 +3,7 @@
 import { num } from '../lib/format'
 import { BACKUP_SUPERVISOR, FLOOR_WORKERS, FLOOR_ZONES, SUPERVISOR } from './seedOps'
 import { useStore } from './store'
+import { stageReceipt } from './warehouse'
 import type { Claim, Defect, GateEntry, Grn, Ncr } from './types'
 
 const get = useStore.getState
@@ -55,6 +56,7 @@ export function receiveGrn(g: Omit<Grn, 'id' | 't'>) {
       return line ? { ...m, balance: m.balance + line.qty } : m
     }),
   })
+  stageReceipt({ id, supplier: g.supplier, lines: g.lines })
   return id
 }
 

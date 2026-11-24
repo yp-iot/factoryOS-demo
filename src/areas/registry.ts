@@ -63,6 +63,10 @@ export const AREAS: AreaMeta[] = [
     name: 'Stores & Warehouse',
     icon: Boxes,
     apps: [
+      { id: 'wh-dashboard', name: 'Warehouse Manager Dashboard', blurb: 'Stock value, space, open tasks and what goes out today, on one screen.', hero: true },
+      { id: 'inventory', name: 'Inventory & Transactions', blurb: 'Every item, where it sits, and every movement in and out.' },
+      { id: 'wh-map', name: 'Warehouse Map', blurb: 'Every rack bay from above, coloured by how full it is.' },
+      { id: 'operator-station', name: 'Operator Station', blurb: 'Scan, pick, put away and count from a handheld. Each scan updates stock.', hardware: true },
       { id: 'material-control', name: 'AI Material Control', blurb: 'Material requests sized from the work order. Low-stock warning ahead of time.', hero: true },
       { id: 'grn', name: 'Goods Received (GRN)', blurb: 'Receive deliveries and update stock.' },
       { id: 'ai-do', name: 'AI Reads Delivery Orders', blurb: 'Snap a delivery order. The details fill themselves in.' },

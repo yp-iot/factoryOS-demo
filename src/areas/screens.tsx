@@ -23,7 +23,11 @@ import { NcrReturns } from './quality/NcrReturns'
 import { AiReadsDo } from './stores/AiReadsDo'
 import { GoodsReceived } from './stores/GoodsReceived'
 import { MaterialControl } from './stores/MaterialControl'
+import { Inventory } from './stores/Inventory'
+import { OperatorStation } from './stores/OperatorStation'
 import { VoiceWarehouse } from './stores/VoiceWarehouse'
+import { WarehouseDashboard } from './stores/WarehouseDashboard'
+import { WarehouseMap } from './stores/WarehouseMap'
 
 const SCREENS: Record<AppId, ComponentType> = {
   'daily-production': DailyProduction,
@@ -42,6 +46,10 @@ const SCREENS: Record<AppId, ComponentType> = {
   grn: GoodsReceived,
   'ai-do': AiReadsDo,
   'voice-warehouse': VoiceWarehouse,
+  'wh-dashboard': WarehouseDashboard,
+  inventory: Inventory,
+  'wh-map': WarehouseMap,
+  'operator-station': OperatorStation,
   'job-costing': JobCosting,
   'scrap-revenue': ScrapRevenue,
   'power-cost': PowerCost,

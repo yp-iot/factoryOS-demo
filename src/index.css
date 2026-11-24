@@ -122,3 +122,12 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* The light sweeping across the handheld's button while it scans. */
+@keyframes scan-sweep {
+  from { left: -35%; }
+  to { left: 100%; }
+}
+.scan-line {
+  animation: scan-sweep 0.65s linear;
+}

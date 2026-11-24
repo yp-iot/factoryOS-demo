@@ -127,7 +127,7 @@ export function seedMaterials(): Material[] {
   ]
 }
 
-const PRICE: Record<MachineId, number> = { M1: 0.03, M2: 0.12, M3: 1.1, M4: 0.85, M5: 0.25, M6: 9.5, P1: 0.4 }
+export const PRICE: Record<MachineId, number> = { M1: 0.03, M2: 0.12, M3: 1.1, M4: 0.85, M5: 0.25, M6: 9.5, P1: 0.4 }
 
 /**
  * Today's open orders start at 07:00, so `made` equals what each machine has
@@ -191,3 +191,6 @@ export function seedMessages(now: number): PhoneMessage[] {
   ]
 }
 
+
+/** What each machine makes, for the finished-goods catalogue. */
+export const PART_NAMES = Object.fromEntries(SPECS.map((s) => [s.id, s.part])) as Record<MachineId, string>

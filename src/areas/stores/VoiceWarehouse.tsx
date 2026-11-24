@@ -14,8 +14,8 @@ interface Line {
 
 // One pick list, spoken a line at a time. The picker answers "Done".
 const PICK_LISTS = [
-  ['MR-0302 for M4. Pick 4 bags PP resin from rack B3.', 'Done.', 'Pick 1 bag white masterbatch from rack D1.', 'Done.', 'Take to M4 line side.', 'Done. At M4.', 'Pick list complete. Next: cartons for WO-1101.'],
-  ['WO-1101 packing. Pick 20 cartons from rack F2.', 'Done.', 'Pick 1 roll of carton tape from rack F4.', 'Done, 1 roll.', 'Take to M1 packing table.', 'Done.', 'Pick list complete.'],
+  ['MR-0302 for M4. Pick 4 bags PP resin from rack B3.', 'Done.', 'Pick 1 bag white masterbatch from rack C1.', 'Done.', 'Take to M4 line side.', 'Done. At M4.', 'Pick list complete. Next: cartons for WO-1101.'],
+  ['WO-1101 packing. Pick 20 cartons from rack D2.', 'Done.', 'Pick 1 roll of carton tape from rack D4.', 'Done, 1 roll.', 'Take to M1 packing table.', 'Done.', 'Pick list complete.'],
   ['MR-0303 for M1. Pick 18 bags PP resin from rack B3.', 'Only 16 on B3.', 'Take 2 more from rack B4, bottom shelf.', 'Done. 18 bags.', 'Take to M1 line side.', 'Done.', 'Pick list complete. Stock count for rack B3 updated.'],
 ]
 

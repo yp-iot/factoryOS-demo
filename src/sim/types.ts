@@ -97,6 +97,10 @@ export type AppId =
   | 'grn'
   | 'ai-do'
   | 'voice-warehouse'
+  | 'wh-dashboard'
+  | 'inventory'
+  | 'wh-map'
+  | 'operator-station'
   | 'job-costing'
   | 'scrap-revenue'
   | 'power-cost'
@@ -206,3 +210,80 @@ export interface SosAlert {
 }
 
 export type DoStage = 'idle' | 'reading' | 'check' | 'saved'
+
+// ── Warehouse ───────────────────────────────────────────────────────────
+
+/** Raw material and packaging share ids with `Material`; each machine's part has its own finished-goods item. */
+export type SkuId = MaterialId | 'tape' | `fg-${MachineId}`
+
+export interface Sku {
+  id: SkuId
+  code: string
+  name: string
+  category: 'Raw material' | 'Packaging' | 'Finished goods'
+  unit: 'kg' | 'pcs' | 'ctn' | 'roll'
+  unitCost: number // RM per unit
+  reorder: number
+}
+
+/** One rack bay, seen from above on the warehouse map. */
+export interface Bin {
+  id: string // "B3"
+  rack: string
+  bay: number
+  sku: SkuId | null
+  cap: number
+}
+
+export type TxnType = 'Receipt' | 'Put-away' | 'Issue' | 'Dispatch' | 'Adjust' | 'Write-off'
+
+export interface Txn {
+  id: string
+  t: number
+  type: TxnType
+  sku: SkuId
+  qty: number // + into the warehouse, − out of it, 0 for a move inside it
+  from: string
+  to: string
+  by: string
+  ref: string
+}
+
+/** Stock sitting on a dock, waiting to be put away. */
+export interface Staged {
+  id: string
+  sku: SkuId
+  qty: number
+  ref: string
+  t: number
+}
+
+export interface OutOrder {
+  id: string // DO number
+  customer: string
+  lines: { sku: SkuId; qty: number }[]
+  due: number
+  dispatchedAt: number | null
+  by: string | null
+}
+
+export interface CycleCount {
+  id: string
+  bin: string
+  t: number
+  counted: number | null
+  expected: number | null
+  doneAt: number | null
+  by: string | null
+  actualDiff: number // how far the shelf really is from the system; the operator finds it
+}
+
+export interface Warehouse {
+  fg: Record<MachineId, number> // cartons in the finished-goods racks
+  fgPallets: Record<MachineId, number> // pallets from each machine already put away today
+  tape: number
+  staged: Staged[]
+  orders: OutOrder[]
+  counts: CycleCount[]
+  txns: Txn[]
+}

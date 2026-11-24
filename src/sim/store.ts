@@ -5,6 +5,7 @@ import { logPower, nextRandom, oee, tick } from './engine'
 import { progressOrders, suggestMaterial } from './orders'
 import { seedBreakdowns, seedMachines, seedMaterials, seedMessages, seedRequests, seedWorkOrders, startTime, TECHNICIANS } from './seed'
 import { DEFECTS, seedCamera, seedClaims, seedGate, seedGrns, seedNcrs } from './seedOps'
+import { nextTxnId, pickBin, seedWarehouse } from './stock'
 import type {
   AppId,
   Breakdown,
@@ -23,6 +24,7 @@ import type {
   SosAlert,
   Speed,
   View,
+  Warehouse,
   WorkOrder,
 } from './types'
 
@@ -54,6 +56,7 @@ interface SimData {
   ncrs: Ncr[]
   gate: GateEntry[]
   grns: Grn[]
+  wh: Warehouse
   claims: Claim[]
   sos: SosAlert[]
   supervisorOnLeave: boolean
@@ -95,7 +98,7 @@ interface Actions {
 
   createWorkOrder: (o: { machineId: MachineId; qty: number; dueDays: number }) => string
   requestMaterial: (woId: string) => string | null
-  issueRequest: (id: string) => void
+  issueRequest: (id: string, by?: string) => void
 }
 
 export type Store = SimData & Actions
@@ -141,6 +144,7 @@ function initial(): SimData {
     ncrs: seedNcrs(now),
     gate: seedGate(now),
     grns: seedGrns(now),
+    wh: seedWarehouse(now, machines),
     claims: seedClaims(now),
     sos: [],
     supervisorOnLeave: false,
@@ -279,11 +283,14 @@ export const useStore = create<Store>()((set, get) => ({
     return id
   },
 
-  issueRequest: (id) => {
+  issueRequest: (id, by = 'Stores') => {
     const s = get()
     const req = s.requests.find((r) => r.id === id)
     if (!req || req.issuedAt !== null) return
+    const from = pickBin(req.material, s.materials, s.wh)
+    const txn = { id: nextTxnId(s.wh.txns), t: s.simTime, type: 'Issue' as const, sku: req.material, qty: -req.qty, from, to: `${req.machineId} line side`, by, ref: req.id }
     set({
+      wh: { ...s.wh, txns: [txn, ...s.wh.txns] },
       requests: s.requests.map((r) => (r.id === id ? { ...r, issuedAt: s.simTime } : r)),
       materials: s.materials.map((mat) =>
         mat.id === req.material ? { ...mat, balance: Math.max(0, mat.balance - req.qty), lineSide: mat.lineSide + req.qty } : mat,
