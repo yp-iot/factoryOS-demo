@@ -123,7 +123,8 @@ export function Assistant() {
     setTyping(append(key, { role: 'user', text }, { role: 'ai', ...reply(text, view, useStore.getState()) }))
   }
 
-  const lift = scenario ? 'bottom-44 lg:bottom-32' : 'bottom-4 lg:bottom-6'
+  // Sits above the host's "Powered by" badge in the bottom-right corner.
+  const lift = scenario ? 'bottom-44 lg:bottom-36' : 'bottom-20'
 
   if (!open)
     return (
