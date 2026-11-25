@@ -73,11 +73,8 @@ export function TopBar() {
       <div className="hazard absolute inset-x-0 top-0 h-1" />
       <button onClick={() => go({ kind: 'home' })} className="flex shrink-0 items-center gap-2.5">
         <img src="/factoryos-mark.png" alt="" className="h-9 w-9 rounded-[22%] lg:h-10 lg:w-10" />
-        <span className="hidden text-left leading-none sm:block">
-          <span className="block text-xl font-extrabold tracking-tight">
-            Factory<span className="text-accent">OS</span>
-          </span>
-          <span className="text-[10px] font-semibold tracking-[0.18em] text-dim uppercase">by Iotronix</span>
+        <span className="hidden text-xl leading-none font-extrabold tracking-tight sm:block">
+          Factory<span className="text-accent">OS</span>
         </span>
       </button>
       <div className="hidden h-8 w-px bg-line lg:block" />
